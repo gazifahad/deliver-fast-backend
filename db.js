@@ -11,10 +11,12 @@ const connectToDatabase = async () => {
 
     // Access the 'foodItems' collection directly
     const itemData = mongoose.connection.db.collection("foodItems");
+    const foodCategory = mongoose.connection.db.collection("foodCategory");
     // Use the find method to retrieve all documents in the collection
     const data = await itemData.find({}).toArray();
-
-    console.log("connected");
+    const categoryData = await foodCategory.find({}).toArray();
+    // console.log(data, categoryData);
+    return { foodItems: data, foodCategory: categoryData };
   } catch (error) {
     console.error("Error connecting to the database:", error);
   }
