@@ -33,12 +33,15 @@ router.post("/OrderData", async (req, res) => {
       res.status(400).send(error.message);
     }
   }
-
-  //   try {
-  //     res.send({});
-  //   } catch (error) {
-  //     console.log(error.message);
-  //     res.setEncoding("server error");
-  //   }
 });
+
+router.post("/MyOrderData", async (req, res) => {
+  try {
+    let mydata = await Orders.findOne({ email: req.body.email });
+    res.json({ orderData: mydata });
+  } catch (error) {
+    res.send("server error", error.message);
+  }
+});
+
 module.exports = router;
