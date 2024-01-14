@@ -19,9 +19,6 @@ router.post(
   body("name", "name less than 5 characters").isLength({ min: 4 }),
   body("name").custom(async (value) => {
     const user = await User.findOne({ name: value });
-    if (user) {
-      throw new Error("user-name already in use");
-    }
   }),
   async (req, res) => {
     const result = validationResult(req);
